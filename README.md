@@ -73,3 +73,4 @@
    - `RENDER_SERVICE_ID`
    - `RENDER_API_KEY`
 8. Обновите `baseUrl` в Postman environment файле на URL вашего сервиса 
+# Test deployment

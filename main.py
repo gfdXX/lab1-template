@@ -1,4 +1,3 @@
-# main.py
 import os
 from contextlib import asynccontextmanager
 from typing import List
@@ -6,11 +5,7 @@ from typing import List
 from fastapi import FastAPI, HTTPException, Response, status, Depends
 from sqlmodel import Field, SQLModel, Session, create_engine, select
 
-# Строка подключения к базе данных.
-# Меняем порт с 5433 на 5432, чтобы соответствовать Docker-конфигурации
 database_url = os.getenv("DATABASE_URL", "postgresql://program:test@localhost:5432/persons")
-
-# Движок базы данных
 engine = create_engine(database_url, echo=True)
 
 class PersonBase(SQLModel):
@@ -32,10 +27,8 @@ def create_db_and_tables():
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    print("Application starting...")
     create_db_and_tables()
     yield
-    print("Application shutting down...")
 
 app = FastAPI(title="RSOi Lab1 API", lifespan=lifespan)
 

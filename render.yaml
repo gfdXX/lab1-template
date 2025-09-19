@@ -10,7 +10,6 @@ services:
           name: person-db
           property: connectionString
     healthCheckPath: /docs
-
 databases:
   - name: person-db
     plan: free
