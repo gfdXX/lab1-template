@@ -16,6 +16,11 @@ jobs:
           fetch-depth: 0
 
       # TODO build, test and deploy project
+      - name: Build Docker image
+        run: docker build . --file Dockerfile --tag rsoi-lab1-app
+
+      - name: Run Unit Tests
+        run: docker run --rm --network host -e DATABASE_URL="postgresql://program:test@localhost:5432/persons" rsoi-lab1-app pytest
 
       - name: Run API Tests
         uses: matt-ball/newman-action@master
