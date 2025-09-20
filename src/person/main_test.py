@@ -61,8 +61,6 @@ def test_delete_person(setup_db):
     location = post_response.headers["Location"]
     person_id = location.split("/")[-1]
     delete_response = client.delete(f"/api/v1/persons/{person_id}")
-    assert delete_response.status_code == 200
-    assert delete_response.json() == {"message": "Person deleted successfully"}
-    
+    assert delete_response.status_code == 204    
     get_response = client.get(f"/api/v1/persons/{person_id}")
     assert get_response.status_code == 404
