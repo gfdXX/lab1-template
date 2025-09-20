@@ -36,6 +36,10 @@ app = FastAPI(title="RSOi Lab1 API", lifespan=lifespan)
 
 print("HELLO2")
 
+@app.get("/")
+def root():
+    return {"message": "RSOi Lab1 API is running", "docs": "/docs"}
+
 def get_session():
     with Session(engine) as session:
         yield session
