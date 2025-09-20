@@ -84,7 +84,7 @@ def update_person(personId: int, person_update: dict, session: Session = Depends
     session.refresh(person)
     return person
 
-@app.delete("/api/v1/persons/{personId}")
+@app.delete("/api/v1/persons/{personId}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_person(personId: int, session: Session = Depends(get_session)):
     person = session.get(Person, personId)
     if not person:
@@ -92,4 +92,4 @@ def delete_person(personId: int, session: Session = Depends(get_session)):
 
     session.delete(person)
     session.commit()
-    return {"message": "Person deleted successfully"}
+    return
