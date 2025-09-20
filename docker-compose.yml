@@ -8,11 +8,35 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: "postgres"
       POSTGRES_DB: postgres
+    healthcheck:
+      test: bash -c "pg_isready -U postgres -d postgres"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - ./db-data:/var/lib/postgresql/data
       - ./postgres/:/docker-entrypoint-initdb.d/
     ports:
       - "5432:5432"
+    networks:
+      - test-network
 
-volumes:
-  db-data:
+  person_service:
+    build: .
+    image: person:latest
+    container_name: person
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: "postgresql://program:test@postgres:5432/persons"
+    networks:
+      - test-network
+    command: ["sh", "-c", "fastapi dev /app/person/main.py --host 0.0.0.0 --port 8000"]
+    ports:
+      - "8000:8000"
+
+networks:
+  test-network:
+    driver: bridge

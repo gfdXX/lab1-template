@@ -5,13 +5,15 @@ from typing import List
 from fastapi import FastAPI, HTTPException, Response, status, Depends
 from sqlmodel import Field, SQLModel, Session, create_engine, select
 
-database_url = os.getenv("DATABASE_URL", "postgresql://program:test@localhost:5432/persons")
+database_url = os.getenv("DATABASE_URL", "postgresql://program:test@postgres:5432/persons")
 engine = create_engine(database_url, echo=True)
+print("HELLO")
 
 class PersonBase(SQLModel):
     name: str = Field(index=True)
     age: int
-    city: str
+    address: str
+    work: str
 
 class Person(PersonBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
@@ -31,6 +33,8 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(title="RSOi Lab1 API", lifespan=lifespan)
+
+print("HELLO2")
 
 def get_session():
     with Session(engine) as session:

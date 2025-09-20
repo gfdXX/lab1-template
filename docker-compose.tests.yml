@@ -1,0 +1,8 @@
+version: "3"
+services:
+  person_service_tests:
+    image: person-tests:latest
+    build: 
+      context: .
+      target: builder
+    command: ["python", "-m", "pytest", "src/person/main_test.py", "-v"]
