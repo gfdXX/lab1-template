@@ -99,7 +99,6 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           check-name: deploy
           wait-interval: 15
-          timeout: 1800
 
       - name: Run API Tests with Newman
         uses: matt-ball/newman-action@master
