@@ -95,8 +95,8 @@ jobs:
         uses: matt-ball/newman-action@master
         with:
           collection: postman/[inst] Lab1.postman_collection.json
-          env: postman/[inst][heroku] Lab1.postman_environment.json
+          environment: postman/[inst][heroku] Lab1.postman_environment.json
           insecure: true
-          env-vars: baseUrl=${{ secrets.RENDER_DEPLOYMENT_URL }}
+          envVar: baseUrl=${{ secrets.RENDER_DEPLOYMENT_URL }}
           delayRequest: 100
           reporters: '[ "cli" ]'
