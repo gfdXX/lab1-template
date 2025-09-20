@@ -32,7 +32,12 @@ async def lifespan(app: FastAPI):
     create_db_and_tables()
     yield
 
-app = FastAPI(title="RSOi Lab1 API", lifespan=lifespan)
+app = FastAPI(
+    title="RSOi Lab1 API", 
+    description="API для управления людьми",
+    version="1.0.0",
+    lifespan=lifespan
+)
 
 print("HELLO2")
 
