@@ -18,4 +18,4 @@ COPY --from=builder /app/src ./src
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "fastapi dev /app/person/main.py --host 0.0.0.0 --port 8000"]
+CMD ["sh", "-c", "fastapi dev /app/src/person/main.py --host 0.0.0.0 --port 8000"]

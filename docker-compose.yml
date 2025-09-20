@@ -32,7 +32,7 @@ services:
       DATABASE_URL: "postgresql://program:test@postgres:5432/persons"
     networks:
       - test-network
-    command: ["sh", "-c", "fastapi dev /app/person/main.py --host 0.0.0.0 --port 8000"]
+    command: ["sh", "-c", "fastapi dev /app/src/person/main.py --host 0.0.0.0 --port 8000"]
     ports:
       - "8000:8000"
 
